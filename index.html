@@ -5,107 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K-Farm Group | Strategic Command Center</title>
     <style>
-        /* 기본 설정 */
         :root { --primary: #0a2516; --gold: #c5a059; --text: #e0e0e0; --bg: #05120b; --card: #0d2d1b; }
-        html { scroll-behavior: smooth; } /* 부드러운 이동 효과 */
+        html { scroll-behavior: smooth; }
         body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.7; }
 
-        /* 헤더 */
-        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'); background-size: cover; text-align: center; border-bottom: 2px solid var(--gold); }
-        h1 { font-size: 3.5rem; color: var(--gold); margin: 0; letter-spacing: 5px; }
-
-        /* 네비게이션 바 (이동의 핵심) */
+        /* 네비게이션 및 헤더 */
+        header { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'); background-size: cover; text-align: center; border-bottom: 2px solid var(--gold); }
         nav { background: var(--primary); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); display: flex; justify-content: center; padding: 15px 0; }
-        nav a { color: var(--gold); text-decoration: none; margin: 0 20px; font-weight: bold; font-size: 1rem; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { color: #fff; text-shadow: 0 0 10px var(--gold); }
+        nav a { color: var(--gold); text-decoration: none; margin: 0 20px; font-weight: bold; text-transform: uppercase; }
 
-        /* 컨텐츠 구역 */
         .container { max-width: 1100px; margin: auto; padding: 20px; }
-        section { padding: 100px 0; border-bottom: 1px solid #1a472a; min-height: 60vh; } /* 구역 구분을 위해 패딩 조정 */
-        h2 { color: var(--gold); font-size: 2.5rem; border-left: 5px solid var(--gold); padding-left: 20px; margin-bottom: 40px; }
+        section { padding: 80px 0; border-bottom: 1px solid #1a472a; }
+        h2 { color: var(--gold); font-size: 2.2rem; margin-bottom: 30px; border-left: 5px solid var(--gold); padding-left: 15px; }
+
+        /* 대시보드 스타일 */
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
+        .stat-card { background: var(--card); border: 1px solid var(--gold); padding: 25px; border-radius: 10px; text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: bold; color: var(--gold); display: block; margin-bottom: 10px; }
+        .stat-label { font-size: 1rem; color: #aaa; }
         
-        /* 이미지 및 카드 */
-        .strategy-img { width: 100%; border: 1px solid var(--gold); border-radius: 10px; margin: 30px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--card); padding: 30px; border-radius: 5px; border: 1px solid #1a472a; }
-        .card h3 { color: var(--gold); margin-top: 0; font-size: 1.5rem; }
+        /* 프로그레스 바 */
+        .progress-container { width: 100%; background-color: #1a472a; border-radius: 20px; margin: 15px 0; }
+        .progress-bar { width: 15%; height: 20px; background-color: var(--gold); border-radius: 20px; text-align: center; line-height: 20px; color: black; font-weight: bold; font-size: 12px; }
 
-        /* 버튼 */
-        .btn { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 15px 30px; text-decoration: none; font-weight: bold; margin-top: 20px; text-transform: uppercase; }
-        .btn:hover { background: var(--gold); color: #000; }
-
-        footer { text-align: center; padding: 50px; background: #000; color: #444; font-size: 0.9rem; }
+        .strategy-img { width: 100%; border: 1px solid var(--gold); border-radius: 10px; margin: 20px 0; }
+        footer { text-align: center; padding: 50px; background: #000; font-size: 0.8rem; color: #444; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>K-FARM GROUP</h1>
-    <p style="letter-spacing: 3px;">STRATEGIC COMMAND CENTER</p>
+    <h1 style="color:var(--gold); font-size:3.5rem; margin:0;">K-FARM GROUP</h1>
+    <p>STRATEGIC SALES COMMAND CENTER</p>
 </header>
 
 <nav>
     <a href="#heritage">Heritage</a>
     <a href="#ir-strategy">IR Strategy</a>
     <a href="#b2b-sales">B2B Sales</a>
-    <a href="#roadmap">Roadmap</a>
+    <a href="#dashboard">Dashboard</a>
 </nav>
 
 <div class="container">
     
     <section id="heritage">
         <h2>01. Heritage: 가치의 계승</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Digital Heritage</h3>
-                <p>장인의 3년 숙성 데이터를 디지털화하여 기후 위기에도 변치 않는 '표준의 맛'을 자산화합니다.</p>
-            </div>
-            <div class="card">
-                <h3>Income Shield</h3>
-                <p>화천 본부의 전량 매입 보장 시스템으로 공급자의 생계와 명예를 동시에 보호합니다.</p>
-            </div>
-        </div>
-        <img src="http://googleusercontent.com/image_generation_content/2" alt="공급자 전략 이미지" class="strategy-img">
+        <img src="http://googleusercontent.com/image_generation_content/2" class="strategy-img">
     </section>
 
     <section id="ir-strategy">
-        <h2>02. IR: 데이터 기반 수익 구조</h2>
-        <img src="http://googleusercontent.com/image_generation_content/3" alt="투자자 ROI 이미지" class="strategy-img">
-        <div class="grid">
-            <div class="card">
-                <h3>영업이익률 30%</h3>
-                <p>와사비 스마트팜의 독점적 마진과 데이터 기반 생산 효율화로 압도적 수익성을 증명합니다.</p>
-            </div>
-            <div class="card">
-                <h3>시장 점유율 15%</h3>
-                <p>강남 500개 하이엔드 클러스터를 기점으로 국내 프리미엄 식자재 시장을 선점합니다.</p>
-            </div>
-        </div>
+        <h2>02. IR Strategy: 수익의 확신</h2>
+        <img src="http://googleusercontent.com/image_generation_content/3" class="strategy-img">
     </section>
 
     <section id="b2b-sales">
-        <h2>03. Sales: 미식의 삼각 편대</h2>
-        <img src="http://googleusercontent.com/image_generation_content/0" alt="셰프용 삼각 편대 이미지" class="strategy-img">
-        <div style="text-align: center;">
-            <p style="font-size: 1.2rem;">쌀, 장류, 와사비 - 하이엔드 테이블을 위한 단 하나의 솔루션</p>
-            <a href="mailto:ceo@ksmart-farm.com" class="btn">VVIP 파트너십 문의</a>
-        </div>
+        <h2>03. B2B Sales: 삼각 편대 솔루션</h2>
+        <img src="http://googleusercontent.com/image_generation_content/0" class="strategy-img">
     </section>
 
-    <section id="roadmap">
-        <h2>04. Roadmap: 시장 지배 로드맵</h2>
-        <img src="http://googleusercontent.com/image_generation_content/4" alt="진입 로드맵 이미지" class="strategy-img">
-        <div class="card" style="border-left: 5px solid var(--gold);">
-            <h3>지휘관의 비전</h3>
-            <p>준비기(D-15)부터 지배기(90일 이후)까지, K-Farm Group은 데이터로 찾고 타이밍으로 설득하여 시장의 주도권을 장악합니다.</p>
+    <section id="dashboard">
+        <h2>04. Real-time Command Dashboard</h2>
+        <p style="color: #aaa; margin-bottom: 40px;">* 본 데이터는 강남 500 클러스터 영업 현황을 실시간 반영합니다.</p>
+        
+        <div class="dashboard">
+            <div class="stat-card">
+                <span class="stat-label">강남 500 상권 침투율</span>
+                <div class="progress-container">
+                    <div class="progress-bar">15%</div>
+                </div>
+                <span class="stat-value">75 / 500</span>
+                <p style="font-size: 0.8rem;">거점 식당 확보 수</p>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">셰프 월평균 추가 수익 (예상)</span>
+                <span class="stat-value">₩3,500,000+</span>
+                <p style="font-size: 0.8rem;">진품 와사비 유료화 기준</p>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">오늘의 도정 및 배송</span>
+                <span class="stat-value">ACTIVE</span>
+                <p style="font-size: 0.8rem;">화천 본부 -> 강남 직송 중</p>
+            </div>
         </div>
+
+        <img src="http://googleusercontent.com/image_generation_content/4" class="strategy-img" style="margin-top:50px;">
     </section>
 
 </div>
 
 <footer>
     <p>&copy; 2026 K-Farm Group. All Rights Reserved.</p>
-    <p>HQ: Gangwon-do, Hwacheon-gun, Sangseo-myeon, Damok-ri 745</p>
 </footer>
 
 </body>
