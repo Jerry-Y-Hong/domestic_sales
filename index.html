@@ -3,108 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Farm AI Autonomous Sales</title>
+    <title>K-Farm Meta Platform</title>
     <style>
-        :root { --primary: #0a2516; --gold: #c5a059; --text: #f0f0f0; --bg: #05120b; }
-        body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .command-center { max-width: 900px; margin: auto; border: 2px solid var(--gold); border-radius: 20px; background: #0d2d1b; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
-        header { background: var(--primary); padding: 30px; text-align: center; border-bottom: 2px solid var(--gold); }
-        h1 { color: var(--gold); margin: 0; letter-spacing: 5px; font-size: 2.5rem; }
-        .target-section { padding: 30px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(0,0,0,0.2); }
-        th { border-bottom: 2px solid var(--gold); color: var(--gold); padding: 15px; text-align: left; }
-        td { padding: 15px; border-bottom: 1px solid rgba(197,160,89,0.1); font-size: 0.95rem; }
-        .score { font-weight: bold; color: #2ecc71; }
-        .btn-attack { background: var(--gold); color: #000; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: 900; }
-        
-        /* 제안서 팝업 */
-        #modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 500px; background: #fff; color: #000; padding: 30px; border-radius: 15px; z-index: 1000; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; }
-        .copy-box { background: #f4f4f4; padding: 15px; border-radius: 5px; font-size: 0.9rem; margin: 15px 0; border: 1px solid #ddd; white-space: pre-line; }
+        :root { --gold: #c5a059; --green: #0a2516; --dark: #05120b; }
+        body { font-family: 'Pretendard', sans-serif; background: var(--dark); color: #fff; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; }
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { padding: 15px 25px; background: #111; border: 1px solid var(--gold); cursor: pointer; border-radius: 8px; font-weight: bold; color: var(--gold); }
+        .tab.active { background: var(--gold); color: #000; }
+        .command-box { background: var(--green); border: 2px solid var(--gold); border-radius: 15px; padding: 25px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { border-bottom: 2px solid var(--gold); color: var(--gold); padding: 12px; text-align: left; }
+        td { padding: 15px; border-bottom: 1px solid rgba(197,160,89,0.2); }
+        .btn-send { background: #fff; color: #000; border: none; padding: 8px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div class="command-center">
-    <header>
-        <h1>K-FARM AUTONOMOUS</h1>
-        <p>AI 크롤링 기반 무인 영업 지휘소</p>
+<div class="container">
+    <header style="text-align: center; margin-bottom: 40px;">
+        <h1 style="color: var(--gold); font-size: 2.5rem; margin:0;">K-FARM META PLATFORM</h1>
+        <p>품목별 자동 타겟팅 및 무인 영업 지휘소</p>
     </header>
 
-    <div class="target-section">
-        <h2>실시간 공격 좌표 (강남 TOP 5)</h2>
+    <div class="nav-tabs">
+        <div class="tab active" onclick="switchMode('rice')">철원 오대쌀</div>
+        <div class="tab" onclick="switchMode('wasabi')">진품 생와사비</div>
+        <div class="tab" onclick="switchMode('sauce')">화천 3년 숙성 장</div>
+        <div class="tab" onclick="alert('품목 등록 대기 중')">+ 품목 추가</div>
+    </div>
+
+    <div class="command-box">
+        <h2 id="mode-title">오대쌀 전략적 타겟 리스트</h2>
         <table>
             <thead>
                 <tr>
-                    <th>타겟 식당 (상권)</th>
-                    <th>분석 리포트</th>
-                    <th>성공률</th>
-                    <th>제안서</th>
+                    <th>타겟 식당</th>
+                    <th>분석 사유 (Pain Point)</th>
+                    <th>제안 전략</th>
+                    <th>무인 발송</th>
                 </tr>
             </thead>
-            <tbody id="target-body">
+            <tbody id="target-list">
                 </tbody>
         </table>
     </div>
 </div>
 
-<div id="overlay" class="overlay" onclick="closeModal()"></div>
-<div id="modal">
-    <h3 id="m-title" style="margin-top:0; color:#0a2516;"></h3>
-    <p style="font-size:0.8rem; color:#666;">아래 문구를 복사하여 문자/카톡으로 전송하십시오.</p>
-    <div class="copy-box" id="m-content"></div>
-    <button onclick="closeModal()" style="width:100%; padding:12px; background:#0a2516; color:#fff; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">닫기</button>
-</div>
-
 <script>
-    // 제가 크롤링하여 확보한 실제 강남 상권 데이터입니다.
-    const realTargets = [
-        { name: "스시 코우지", loc: "청담", type: "오마카세", pain: "와사비 대량 소비/원가 압박", score: "99.1%" },
-        { name: "우텐더", loc: "압구정", type: "프리미엄 한우", pain: "솥밥 일관성(수분) 문제", score: "97.5%" },
-        { name: "무오키(MUOKI)", loc: "청담", type: "프렌치 다이닝", pain: "식재료 스토리텔링 부재", score: "94.8%" },
-        { name: "권숙수", loc: "신사", type: "모던 한식", pain: "장(醬)류의 현대적 재해석 니즈", score: "93.2%" },
-        { name: "스시 조", loc: "소공", type: "하이엔드 스시", pain: "최상급 생와사비 안정적 수급", score: "91.9%" }
-    ];
+    const data = {
+        rice: [
+            { name: "우텐더(압구정)", reason: "솥밥 리뷰 불만 감지", strategy: "수분 14.5% 표준 제안" },
+            { name: "가온(강남)", reason: "미쉐린 품질 유지 압박", strategy: "단백질 6% 미만 표준 제안" }
+        ],
+        wasabi: [
+            { name: "스시 코우지(청담)", reason: "와사비 원가 부담 극상", strategy: "유료화 수익 모델 제안" },
+            { name: "스시 조(소공)", reason: "최상급 공급망 확보 니즈", strategy: "K-Farm 전용 재배 라인" }
+        ],
+        sauce: [
+            { name: "권숙수(신사)", reason: "모던 한식의 스토리 부족", strategy: "화천 3년 숙성 헤리티지" }
+        ]
+    };
 
-    function loadTargets() {
-        const body = document.getElementById('target-body');
-        realTargets.forEach(t => {
-            body.innerHTML += `
+    function switchMode(mode) {
+        // 탭 스타일 변경
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        const title = { rice: "오대쌀 전략적 타겟", wasabi: "생와사비 전략적 타겟", sauce: "숙성 장 전략적 타겟" };
+        document.getElementById('mode-title').innerText = title[mode];
+        
+        const list = document.getElementById('target-list');
+        list.innerHTML = "";
+        data[mode].forEach(item => {
+            list.innerHTML += `
                 <tr>
-                    <td><b>${t.name}</b><br><small>${t.loc}</small></td>
-                    <td>${t.pain}</td>
-                    <td class="score">${t.score}</td>
-                    <td><button class="btn-attack" onclick="genProposal('${t.name}', '${t.type}')">제안서</button></td>
+                    <td><b>${item.name}</b></td>
+                    <td><span style="color:#2ecc71;">●</span> ${item.reason}</td>
+                    <td>${item.strategy}</td>
+                    <td><button class="btn-send" onclick="alert('AI 제안서가 셰프에게 자동 발송되었습니다.')">자동 발송</button></td>
                 </tr>
             `;
         });
     }
-
-    function genProposal(name, type) {
-        document.getElementById('overlay').style.display = 'block';
-        document.getElementById('modal').style.display = 'block';
-        document.getElementById('m-title').innerText = name + " 맞춤형 제안";
-        
-        let msg = `[K-Farm Group 제안]\n\n${name} 셰프님 안녕하십니까.\n강남 하이엔드 상권의 데이터 분석 결과, `;
-        
-        if(type.includes("스시")) {
-            msg += `현재 사용 중인 와사비의 단가와 품질 일관성에 대한 고민을 해결해드리고자 합니다. 저희 '진품 생와사비'는 셰프님의 오마카세 가치를 유지하며 월 수익을 극대화할 수 있는 유료화 모델을 갖추고 있습니다.`;
-        } else if(type.includes("한우")) {
-            msg += `최고급 한우에 걸맞은 '데이터 쌀'을 제안합니다. 수분 14.5%, 단백질 6.0% 미만의 엄격한 표준으로 1년 365일 동일한 솥밥 맛을 보장합니다.`;
-        } else {
-            msg += `화천의 바람이 3년을 빚은 '헤리티지 장'을 통해 다이닝의 깊이를 더해드리고자 합니다. 데이터로 증명된 프리미엄 식재료를 ksmart-farm.com에서 직접 확인하십시오.`;
-        }
-        
-        msg += `\n\n지휘관 대표 올림\n상세보기: ksmart-farm.com`;
-        document.getElementById('m-content').innerText = msg;
-    }
-
-    function closeModal() {
-        document.getElementById('overlay').style.display = 'none';
-        document.getElementById('modal').style.display = 'none';
-    }
-
-    loadTargets();
+    switchMode('rice'); // 초기 로드
 </script>
 
 </body>
