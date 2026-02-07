@@ -1,0 +1,23 @@
+name: K-Farm Daily Recon
+
+on:
+  schedule:
+    - cron: '0 19 * * *' # 한국 시간 매일 새벽 4시 자동 정찰
+  workflow_dispatch:      # 사장님이 원할 때 수동 가동 버튼
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v3
+
+      - name: 파이썬 설정
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: 자동 정찰 실행
+        run: |
+          echo "정찰병 가동 준비 완료"
+          # 내일 아침 제가 드릴 crawler.py가 여기서 실행될 예정입니다.
