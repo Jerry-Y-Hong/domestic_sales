@@ -3,123 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Farm Group | Interactive Dashboard</title>
+    <title>K-Farm Group | Strategic Command</title>
     <style>
-        :root { --primary: #0a2516; --gold: #c5a059; --text: #f0f0f0; --bg: #05120b; --card: #0d2d1b; }
+        :root { --primary: #0a2516; --gold: #c5a059; --red: #d32f2f; --text: #f0f0f0; --bg: #05120b; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
-
-        /* 네비게이션 */
-        nav { background: var(--primary); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); display: flex; justify-content: center; padding: 15px 0; }
-        nav a { color: var(--gold); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+        
+        nav { background: var(--primary); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--gold); display: flex; justify-content: center; padding: 15px 0; }
+        nav a { color: var(--gold); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9rem; }
 
         .container { max-width: 1000px; margin: auto; padding: 20px; }
-        h2 { color: var(--gold); border-left: 5px solid var(--gold); padding-left: 15px; margin-top: 60px; }
+        .section { background: #0d2d1b; border: 1px solid var(--gold); border-radius: 15px; padding: 30px; margin-bottom: 50px; }
+        h2 { color: var(--gold); border-left: 5px solid var(--gold); padding-left: 15px; }
 
-        /* 대시보드 박스 */
-        .dashboard-container { background: var(--card); border: 2px solid var(--gold); border-radius: 20px; padding: 40px; box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); }
+        /* 대시보드 게이지 */
+        .gauge-outer { width: 100%; height: 30px; background: #1a472a; border-radius: 15px; overflow: hidden; margin: 20px 0; border: 1px solid var(--gold); }
+        #progressBar { width: 15%; height: 100%; background: linear-gradient(90deg, #c5a059, #fff); transition: width 0.3s ease; box-shadow: 0 0 15px var(--gold); }
         
-        /* 점유율 게이지 */
-        .gauge-section { text-align: center; margin-bottom: 50px; }
-        .progress-outer { width: 100%; height: 30px; background: #1a472a; border-radius: 15px; overflow: hidden; margin: 20px 0; border: 1px solid var(--gold); }
-        #progressBar { width: 15%; height: 100%; background: linear-gradient(90deg, #c5a059, #fff); transition: width 0.5s ease-in-out; box-shadow: 0 0 15px var(--gold); }
-        
+        /* 버튼 디자인 */
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        button { flex: 1; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; font-size: 1rem; transition: 0.2s; }
+        .btn-add { background: var(--gold); color: #000; }
+        .btn-sub { background: #333; color: #fff; }
+        .btn-reset { background: var(--red); color: #fff; width: 100%; margin-top: 10px; }
+        button:hover { opacity: 0.8; transform: scale(1.02); }
+
         /* 수익 계산기 */
-        .calc-section { background: rgba(0,0,0,0.3); padding: 30px; border-radius: 15px; border: 1px solid rgba(197,160,89,0.3); }
-        .input-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 10px; color: var(--gold); font-weight: bold; }
-        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--gold); background: #000; color: #fff; font-size: 1.1rem; box-sizing: border-box; }
-        
-        .result-box { text-align: center; margin-top: 30px; padding: 20px; background: var(--primary); border-radius: 10px; }
-        #totalProfit { font-size: 2.5rem; font-weight: 900; color: var(--gold); display: block; }
-
-        /* 버튼 */
-        .btn-action { background: var(--gold); color: #000; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; margin-top: 10px; font-size: 1rem; }
-        .btn-action:hover { background: #fff; transform: scale(1.02); }
-
-        footer { text-align: center; margin-top: 100px; color: #444; font-size: 0.8rem; }
+        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--gold); background: #000; color: #fff; margin-bottom: 15px; font-size: 1.1rem; box-sizing: border-box; }
+        .result-box { text-align: center; padding: 20px; background: #000; border-radius: 10px; border: 1px solid var(--gold); font-size: 2.2rem; font-weight: 900; color: var(--gold); }
     </style>
 </head>
 <body>
 
 <nav>
     <a href="#dashboard">Dashboard</a>
-    <a href="#calculator">Profit Calc</a>
-    <a href="https://ksmart-farm.com">Home</a>
+    <a href="#calc">Profit Calc</a>
+    <a href="#target">AI Target</a>
 </nav>
 
 <div class="container">
     <header style="text-align: center; padding: 40px 0;">
-        <h1 style="color: var(--gold); letter-spacing: 5px;">K-FARM COMMAND</h1>
-        <p>실전 영업 지휘 및 수익 시뮬레이션</p>
+        <h1 style="color: var(--gold); font-size: 3rem; margin:0; letter-spacing:5px;">K-FARM COMMAND</h1>
+        <p>전략적 영업 지휘 및 실시간 관제 시스템</p>
     </header>
 
-    <section id="dashboard" class="dashboard-container">
-        <div class="gauge-section">
-            <h2>강남 500 클러스터 점유 현황</h2>
-            <p>현재 확보된 거점 식당: <span id="storeCount" style="color:var(--gold); font-weight:bold;">75</span> / 500 개소</p>
-            <div class="progress-outer">
-                <div id="progressBar"></div>
-            </div>
-            <p>현재 점유율: <span id="percentText" style="color:var(--gold); font-weight:bold;">15%</span></p>
-            <button class="btn-action" onclick="addStore()">+ 신규 영업 성공 (데이터 업데이트)</button>
+    <section id="dashboard" class="section">
+        <h2>영업 현황 관제 (삭제 기능 활성화)</h2>
+        <p style="font-size:1.2rem;">확보 식당: <span id="storeCount" style="color:var(--gold); font-weight:bold;">75</span> / 500</p>
+        <div class="gauge-outer"><div id="progressBar"></div></div>
+        <div class="btn-group">
+            <button class="btn-add" onclick="update(1)">+ 영업 성공 (추가)</button>
+            <button class="btn-sub" onclick="update(-1)">- 데이터 삭제 (차감)</button>
         </div>
-
-        <hr style="border: 0.5px solid rgba(197,160,89,0.2); margin: 40px 0;">
-
-        <div id="calculator" class="calc-section">
-            <h2>셰프 설득용 수익 시뮬레이터</h2>
-            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px;">* 일일 방문객과 와사비 추가 비용을 입력하여 월 수익을 계산하십시오.</p>
-            
-            <div class="input-group">
-                <label>일일 평균 테이블 수 (평균)</label>
-                <input type="number" id="dailyTables" value="20" oninput="calculate()">
-            </div>
-            
-            <div class="input-group">
-                <label>와사비 추가 서비스 단가 (원)</label>
-                <input type="number" id="wasabiPrice" value="5000" oninput="calculate()">
-            </div>
-
-            <div class="result-box">
-                <span style="color: #fff;">예상 월 추가 수익 (30일 기준)</span>
-                <span id="totalProfit">₩ 3,000,000</span>
-                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">(운영비 및 식자재 원가 제외 순증액)</p>
-            </div>
-        </div>
+        <button class="btn-reset" onclick="resetAll()">지휘소 데이터 전체 리셋</button>
     </section>
 
-    <footer>
-        <p>K-FARM GROUP | 지휘관 전용 인터랙티브 시스템</p>
-        <p>본 페이지의 모든 수치는 실시간 시뮬레이션용입니다.</p>
-    </footer>
+    <section id="calc" class="section">
+        <h2>셰프 설득용 수익 시뮬레이터</h2>
+        <label style="display:block; margin-bottom:10px;">일일 평균 테이블 수 (숫자를 직접 입력하세요)</label>
+        <input type="number" id="tables" value="20" oninput="runCalc()">
+        <label style="display:block; margin-bottom:10px;">와사비 서비스 단가(원)</label>
+        <input type="number" id="price" value="5000" oninput="runCalc()">
+        <div class="result-box" id="result">₩ 3,000,000</div>
+        <p style="text-align:center; font-size:0.8rem; color:#888; margin-top:10px;">* 월 30일 기준 예상 추가 수익</p>
+    </section>
+
+    <section id="target" class="section">
+        <h2>AI 오늘의 공격 좌표 (크롤링 데이터)</h2>
+        <div style="background:rgba(0,0,0,0.5); padding:20px; border-radius:10px; border:1px dashed var(--gold);">
+            <p style="margin:10px 0;">1. <b>스시 OO (청담)</b> - AI 성공확률: <span style="color:#2ecc71;">98.5%</span> (와사비 유료화 최적)</p>
+            <p style="margin:10px 0;">2. <b>OO등심 (압구정)</b> - AI 성공확률: <span style="color:#2ecc71;">95.2%</span> (오대쌀 데이터 마케팅)</p>
+            <p style="margin:10px 0;">3. <b>가이세키 O (신사)</b> - AI 성공확률: <span style="color:#2ecc71;">92.8%</span> (삼각편대 패키지 제안)</p>
+        </div>
+    </section>
 </div>
 
 <script>
-    // 점유율 업데이트 함수
-    let currentStores = 75;
-    function addStore() {
-        if(currentStores < 500) {
-            currentStores++;
-            const percent = (currentStores / 500 * 100).toFixed(1);
-            document.getElementById('storeCount').innerText = currentStores;
-            document.getElementById('percentText').innerText = percent + '%';
-            document.getElementById('progressBar').style.width = percent + '%';
+    let stores = 75;
+
+    // 대시보드 업데이트 (추가/삭제)
+    function update(val) {
+        stores += val;
+        if(stores < 0) stores = 0;
+        if(stores > 500) stores = 500;
+        
+        const percent = (stores / 500 * 100).toFixed(1);
+        document.getElementById('storeCount').innerText = stores;
+        document.getElementById('progressBar').style.width = percent + '%';
+    }
+
+    // 초기화
+    function resetAll() {
+        if(confirm("모든 영업 데이터를 초기화하시겠습니까?")) {
+            stores = 0;
+            update(0);
         }
     }
 
-    // 수익 계산 함수
-    function calculate() {
-        const tables = document.getElementById('dailyTables').value;
-        const price = document.getElementById('wasabiPrice').value;
-        const monthly = tables * price * 30;
-        
-        document.getElementById('totalProfit').innerText = "₩ " + monthly.toLocaleString();
+    // 수익 계산기
+    function runCalc() {
+        const t = document.getElementById('tables').value;
+        const p = document.getElementById('price').value;
+        const total = (t * p * 30).toLocaleString();
+        document.getElementById('result').innerText = "₩ " + total;
     }
 
-    // 초기 실행
-    calculate();
+    // 페이지 로드 시 초기 실행
+    update(0); 
+    runCalc();
 </script>
-
 </body>
 </html>
