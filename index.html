@@ -5,41 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K-Farm Group | Strategic Command Center</title>
     <style>
+        /* 기본 설정 */
         :root { --primary: #0a2516; --gold: #c5a059; --text: #e0e0e0; --bg: #05120b; --card: #0d2d1b; }
-        body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.7; overflow-x: hidden; }
-        header { height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'); background-size: cover; text-align: center; }
-        h1 { font-size: 3.5rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 3px; }
-        .nav-bar { display: flex; justify-content: center; gap: 20px; background: var(--primary); padding: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--gold); }
-        .nav-bar a { color: var(--gold); text-decoration: none; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
-        .container { max-width: 1200px; margin: auto; padding: 50px 20px; }
-        .strategy-section { margin-bottom: 100px; }
-        .strategy-img { width: 100%; border-radius: 10px; border: 1px solid var(--gold); margin-bottom: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: var(--card); padding: 30px; border-radius: 10px; border-left: 3px solid var(--gold); }
-        .card h3 { color: var(--gold); margin-top: 0; }
-        .footer-info { text-align: center; padding: 50px; background: #000; font-size: 0.8rem; color: #555; }
-        .btn-gold { display: inline-block; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+        html { scroll-behavior: smooth; } /* 부드러운 이동 효과 */
+        body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.7; }
+
+        /* 헤더 */
+        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'); background-size: cover; text-align: center; border-bottom: 2px solid var(--gold); }
+        h1 { font-size: 3.5rem; color: var(--gold); margin: 0; letter-spacing: 5px; }
+
+        /* 네비게이션 바 (이동의 핵심) */
+        nav { background: var(--primary); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); display: flex; justify-content: center; padding: 15px 0; }
+        nav a { color: var(--gold); text-decoration: none; margin: 0 20px; font-weight: bold; font-size: 1rem; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: #fff; text-shadow: 0 0 10px var(--gold); }
+
+        /* 컨텐츠 구역 */
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        section { padding: 100px 0; border-bottom: 1px solid #1a472a; min-height: 60vh; } /* 구역 구분을 위해 패딩 조정 */
+        h2 { color: var(--gold); font-size: 2.5rem; border-left: 5px solid var(--gold); padding-left: 20px; margin-bottom: 40px; }
+        
+        /* 이미지 및 카드 */
+        .strategy-img { width: 100%; border: 1px solid var(--gold); border-radius: 10px; margin: 30px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--card); padding: 30px; border-radius: 5px; border: 1px solid #1a472a; }
+        .card h3 { color: var(--gold); margin-top: 0; font-size: 1.5rem; }
+
+        /* 버튼 */
+        .btn { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 15px 30px; text-decoration: none; font-weight: bold; margin-top: 20px; text-transform: uppercase; }
+        .btn:hover { background: var(--gold); color: #000; }
+
+        footer { text-align: center; padding: 50px; background: #000; color: #444; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=150&q=80" style="width:80px; margin-bottom:20px; border-radius:50%;">
     <h1>K-FARM GROUP</h1>
-    <p>하이엔드 식문화의 새로운 기준 - 전략 지휘소</p>
+    <p style="letter-spacing: 3px;">STRATEGIC COMMAND CENTER</p>
 </header>
 
-<div class="nav-bar">
+<nav>
     <a href="#heritage">Heritage</a>
-    <a href="#ir">IR Strategy</a>
-    <a href="#trinity">B2B Sales</a>
-    <a href="#roadmap">Command Room</a>
-</div>
+    <a href="#ir-strategy">IR Strategy</a>
+    <a href="#b2b-sales">B2B Sales</a>
+    <a href="#roadmap">Roadmap</a>
+</nav>
 
 <div class="container">
     
-    <section id="heritage" class="strategy-section">
-        <h2 style="color:var(--gold)">01. Heritage: 가치의 계승</h2>
+    <section id="heritage">
+        <h2>01. Heritage: 가치의 계승</h2>
         <div class="grid">
             <div class="card">
                 <h3>Digital Heritage</h3>
@@ -50,8 +65,48 @@
                 <p>화천 본부의 전량 매입 보장 시스템으로 공급자의 생계와 명예를 동시에 보호합니다.</p>
             </div>
         </div>
+        <img src="http://googleusercontent.com/image_generation_content/2" alt="공급자 전략 이미지" class="strategy-img">
     </section>
 
-    <section id="ir" class="strategy-section">
-        <h2 style="color:var(--gold)">02. IR: 데이터가 지배하는 수익 구조</h2>
-        <img src="http://googleusercontent.com/image_generation_content/3
+    <section id="ir-strategy">
+        <h2>02. IR: 데이터 기반 수익 구조</h2>
+        <img src="http://googleusercontent.com/image_generation_content/3" alt="투자자 ROI 이미지" class="strategy-img">
+        <div class="grid">
+            <div class="card">
+                <h3>영업이익률 30%</h3>
+                <p>와사비 스마트팜의 독점적 마진과 데이터 기반 생산 효율화로 압도적 수익성을 증명합니다.</p>
+            </div>
+            <div class="card">
+                <h3>시장 점유율 15%</h3>
+                <p>강남 500개 하이엔드 클러스터를 기점으로 국내 프리미엄 식자재 시장을 선점합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="b2b-sales">
+        <h2>03. Sales: 미식의 삼각 편대</h2>
+        <img src="http://googleusercontent.com/image_generation_content/0" alt="셰프용 삼각 편대 이미지" class="strategy-img">
+        <div style="text-align: center;">
+            <p style="font-size: 1.2rem;">쌀, 장류, 와사비 - 하이엔드 테이블을 위한 단 하나의 솔루션</p>
+            <a href="mailto:ceo@ksmart-farm.com" class="btn">VVIP 파트너십 문의</a>
+        </div>
+    </section>
+
+    <section id="roadmap">
+        <h2>04. Roadmap: 시장 지배 로드맵</h2>
+        <img src="http://googleusercontent.com/image_generation_content/4" alt="진입 로드맵 이미지" class="strategy-img">
+        <div class="card" style="border-left: 5px solid var(--gold);">
+            <h3>지휘관의 비전</h3>
+            <p>준비기(D-15)부터 지배기(90일 이후)까지, K-Farm Group은 데이터로 찾고 타이밍으로 설득하여 시장의 주도권을 장악합니다.</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 K-Farm Group. All Rights Reserved.</p>
+    <p>HQ: Gangwon-do, Hwacheon-gun, Sangseo-myeon, Damok-ri 745</p>
+</footer>
+
+</body>
+</html>
