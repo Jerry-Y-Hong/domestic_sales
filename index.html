@@ -3,36 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Farm Group | 국내 세일즈 커맨드 센터</title>
+    <title>K-Farm Group | 국내 영업 지휘소</title>
     <style>
-        body { font-family: 'Apple SD Gothic Neo', sans-serif; background-color: #0d0d0d; color: #e0e0e0; line-height: 1.6; margin: 0; padding: 10px; }
-        .container { max-width: 900px; margin: 0 auto; border: 1.5px solid #d4af37; padding: 20px; border-radius: 15px; background: #1a1a1a; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
-        h1 { color: #d4af37; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
-        .section { margin-bottom: 25px; padding: 20px; background: #262626; border-radius: 10px; border-left: 4px solid #d4af37; }
-        .highlight { color: #ffdf00; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9em; }
-        th { background: #333; color: #d4af37; padding: 12px; border: 1px solid #444; }
-        td { padding: 10px; border: 1px solid #444; text-align: center; }
+        :root { --primary: #1a472a; --accent: #d4af37; --text: #333; --bg: #fff; }
+        body { font-family: 'Pretendard', sans-serif; line-height: 1.6; color: var(--text); margin: 0; background: #f9f9f9; }
+        header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        section { background: white; margin-bottom: 40px; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 15px; font-size: 28px; }
+        .hero-img { width: 100%; border-radius: 10px; margin: 20px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #fff; }
+        .card h3 { color: var(--accent); margin-top: 0; }
+        .highlight { color: var(--primary); font-weight: bold; }
+        footer { text-align: center; padding: 40px; color: #888; font-size: 0.9em; }
+        .btn { display: inline-block; background: var(--accent); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>K-Farm Sales Command Center</h1>
-        <div class="section">
-            <p>사장님, <span class="highlight">강남/서초 하이엔드 500개 타겟 리스트</span>가 준비되었습니다.</p>
-            <table>
-                <thead>
-                    <tr><th>업종</th><th>지역</th><th>전략</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>미슐랭 다이닝</td><td>청담/압구정</td><td>프리미엄 소포장</td></tr>
-                    <tr><td>대형 한정식</td><td>서초/반포</td><td>대량 납품 계약</td></tr>
-                    <tr><td>오마카세</td><td>신사/논현</td><td>단일 품종 특화미</td></tr>
-                </tbody>
-            </table>
+
+<header>
+    <h1>K-Farm Group</h1>
+    <p>데이터로 빚은 전통, 미식의 새로운 기준을 세웁니다</p>
+</header>
+
+<div class="container">
+    
+    <section>
+        <h2>01. 이해관계자 연합 [공생의 서약]</h2>
+        <p class="highlight">"우리는 기술로 전통을 보호하고, 데이터로 가치를 증명합니다."</p>
+        <img src="http://googleusercontent.com/image_generation_content/1" alt="이해관계자 전략 지도" class="hero-img">
+        <div class="grid">
+            <div class="card">
+                <h3>공급자: 가치의 계승</h3>
+                <p>장인의 비법을 디지털 데이터로 박제하여, 기후와 노동으로부터 자유로운 안정적 수익 구조를 제공합니다.</p>
+            </div>
+            <div class="card">
+                <h3>투자자: 미래의 독점</h3>
+                <p>진품 와사비 스마트팜과 하이엔드 시장 선점을 통해 예측 가능한 고수익 플랫폼을 구축합니다.</p>
+            </div>
+            <div class="card">
+                <h3>유통업자: 리저브의 권위</h3>
+                <p>독점 공급권과 당일 도정/수확 시스템으로 경쟁사가 흉내 낼 수 없는 신선도를 보장합니다.</p>
+            </div>
         </div>
-        <p style="text-align:center; color:#d4af37;">K-Farm Group 진격 준비 완료 🚀</p>
-    </div>
+    </section>
+
+    <section>
+        <h2>02. 미식의 정점 [K-Farm Trinity]</h2>
+        <p class="highlight">"당신의 요리에 화룡점정을 찍을 최후의 퍼즐"</p>
+        <img src="http://googleusercontent.com/image_generation_content/0" alt="미식의 정점 삼각 편대" class="hero-img">
+        <div class="grid">
+            <div class="card">
+                <h3>철원오대쌀</h3>
+                <p>백옥 같은 자존심, 입안에서 살아 움직이는 탄탄한 식감의 정수.</p>
+            </div>
+            <div class="card">
+                <h3>전통 장류</h3>
+                <p>장독 속 3년의 세월이 빚어낸 깊고 진한 감칠맛의 심연.</p>
+            </div>
+            <div class="card">
+                <h3>진품 와사비</h3>
+                <p>청량한 타격감 뒤에 오는 고귀한 단맛의 반전.</p>
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <p><strong>셰프를 위한 제안:</strong> 유료 와사비 모델 도입을 통한 수익성 극대화 솔루션 제공</p>
+            <a href="#" class="btn">리저브 파트너십 문의하기</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>03. 성장의 법칙 [Vision & ROI]</h2>
+        <p>리스크는 데이터로 지우고, 수익은 가치로 채웁니다.</p>
+        <ul>
+            <li><strong>재무적 ROI:</strong> 시설 투자비 조기 회수 및 안정적 순이익률 30% 달성 목표.</li>
+            <li><strong>리스크 방어:</strong> 스마트팜 기술을 통한 기후 및 물가 변동성 완벽 차단.</li>
+            <li><strong>비전:</strong> 대한민국을 넘어 세계가 인정하는 'K-프리미엄 식재료'의 표준 확립.</li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 K-Farm Group. All Rights Reserved. | 본 사이트는 국내 영업 지휘소입니다.</p>
+</footer>
+
 </body>
 </html>
-
