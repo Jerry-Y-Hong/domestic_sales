@@ -3,146 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Farm Group | Strategic Command</title>
+    <title>K-Farm Group | Interactive Dashboard</title>
     <style>
         :root { --primary: #0a2516; --gold: #c5a059; --text: #f0f0f0; --bg: #05120b; --card: #0d2d1b; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.8; }
+        body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
 
-        /* 세련된 배경이 포함된 헤더 */
-        header { 
-            height: 60vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1532339142463-fd0a8979791a?auto=format&fit=crop&w=1600&q=80'); 
-            background-size: cover;
-            text-align: center; 
-            border-bottom: 3px solid var(--gold);
-        }
-        h1 { font-size: clamp(2rem, 10vw, 4rem); color: var(--gold); margin: 0; letter-spacing: 5px; font-weight: 900; }
-
-        /* 네비게이션: 주소(#) 매칭 완벽화 */
+        /* 네비게이션 */
         nav { background: var(--primary); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); display: flex; justify-content: center; padding: 15px 0; }
-        nav a { color: var(--gold); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.95rem; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { color: #fff; text-shadow: 0 0 10px var(--gold); }
+        nav a { color: var(--gold); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
 
-        /* 컨텐츠 섹션 */
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        section { padding: 100px 0; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
-        h2 { color: var(--gold); font-size: 2.2rem; border-left: 5px solid var(--gold); padding-left: 20px; margin-bottom: 40px; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        h2 { color: var(--gold); border-left: 5px solid var(--gold); padding-left: 15px; margin-top: 60px; }
 
-        /* 대시보드 디자인 (절대 안깨짐) */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .stat-card { background: var(--card); border: 1px solid var(--gold); padding: 40px; border-radius: 15px; text-align: center; }
-        .stat-value { font-size: 3.5rem; font-weight: 800; color: var(--gold); display: block; margin: 10px 0; }
+        /* 대시보드 박스 */
+        .dashboard-container { background: var(--card); border: 2px solid var(--gold); border-radius: 20px; padding: 40px; box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); }
         
-        /* 실시간 게이지 */
-        .gauge-container { width: 100%; height: 20px; background: #1a472a; border-radius: 10px; margin: 20px 0; overflow: hidden; position: relative; }
-        .gauge-bar { width: 15%; height: 100%; background: linear-gradient(90deg, #c5a059, #fff); box-shadow: 0 0 15px var(--gold); animation: pulse 2s infinite; }
+        /* 점유율 게이지 */
+        .gauge-section { text-align: center; margin-bottom: 50px; }
+        .progress-outer { width: 100%; height: 30px; background: #1a472a; border-radius: 15px; overflow: hidden; margin: 20px 0; border: 1px solid var(--gold); }
+        #progressBar { width: 15%; height: 100%; background: linear-gradient(90deg, #c5a059, #fff); transition: width 0.5s ease-in-out; box-shadow: 0 0 15px var(--gold); }
         
-        @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
+        /* 수익 계산기 */
+        .calc-section { background: rgba(0,0,0,0.3); padding: 30px; border-radius: 15px; border: 1px solid rgba(197,160,89,0.3); }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 10px; color: var(--gold); font-weight: bold; }
+        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--gold); background: #000; color: #fff; font-size: 1.1rem; box-sizing: border-box; }
+        
+        .result-box { text-align: center; margin-top: 30px; padding: 20px; background: var(--primary); border-radius: 10px; }
+        #totalProfit { font-size: 2.5rem; font-weight: 900; color: var(--gold); display: block; }
 
-        /* 설명용 카드 */
-        .strategy-box { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 10px; border: 1px dashed var(--gold); margin-top: 30px; }
-        .btn { display: inline-block; background: var(--gold); color: #000; padding: 15px 40px; border-radius: 5px; text-decoration: none; font-weight: 800; margin-top: 30px; }
-        
-        footer { text-align: center; padding: 60px; background: #000; color: #444; font-size: 0.9rem; }
+        /* 버튼 */
+        .btn-action { background: var(--gold); color: #000; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; margin-top: 10px; font-size: 1rem; }
+        .btn-action:hover { background: #fff; transform: scale(1.02); }
+
+        footer { text-align: center; margin-top: 100px; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>K-FARM GROUP</h1>
-    <p style="letter-spacing: 5px; color: #ccc;">STRATEGIC COMMAND CENTER</p>
-</header>
-
 <nav>
-    <a href="#heritage">Heritage</a>
-    <a href="#ir-strategy">IR Strategy</a>
-    <a href="#b2b-sales">B2B Sales</a>
     <a href="#dashboard">Dashboard</a>
+    <a href="#calculator">Profit Calc</a>
+    <a href="https://ksmart-farm.com">Home</a>
 </nav>
 
 <div class="container">
-    
-    <section id="heritage">
-        <h2>01. Heritage: 전통의 디지털 자산화</h2>
-        <div class="dashboard-grid">
-            <div class="stat-card">
-                <h3>Digital Archiving</h3>
-                <p>장인의 비법을 데이터로 기록하여 기후 위기에도 변치 않는 '표준의 맛'을 완성합니다.</p>
+    <header style="text-align: center; padding: 40px 0;">
+        <h1 style="color: var(--gold); letter-spacing: 5px;">K-FARM COMMAND</h1>
+        <p>실전 영업 지휘 및 수익 시뮬레이션</p>
+    </header>
+
+    <section id="dashboard" class="dashboard-container">
+        <div class="gauge-section">
+            <h2>강남 500 클러스터 점유 현황</h2>
+            <p>현재 확보된 거점 식당: <span id="storeCount" style="color:var(--gold); font-weight:bold;">75</span> / 500 개소</p>
+            <div class="progress-outer">
+                <div id="progressBar"></div>
             </div>
-            <div class="stat-card">
-                <h3>Income Shield</h3>
-                <p>화천 본부의 전량 매입 보장 시스템으로 공급자의 생계와 명예를 보호합니다.</p>
+            <p>현재 점유율: <span id="percentText" style="color:var(--gold); font-weight:bold;">15%</span></p>
+            <button class="btn-action" onclick="addStore()">+ 신규 영업 성공 (데이터 업데이트)</button>
+        </div>
+
+        <hr style="border: 0.5px solid rgba(197,160,89,0.2); margin: 40px 0;">
+
+        <div id="calculator" class="calc-section">
+            <h2>셰프 설득용 수익 시뮬레이터</h2>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px;">* 일일 방문객과 와사비 추가 비용을 입력하여 월 수익을 계산하십시오.</p>
+            
+            <div class="input-group">
+                <label>일일 평균 테이블 수 (평균)</label>
+                <input type="number" id="dailyTables" value="20" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label>와사비 추가 서비스 단가 (원)</label>
+                <input type="number" id="wasabiPrice" value="5000" oninput="calculate()">
+            </div>
+
+            <div class="result-box">
+                <span style="color: #fff;">예상 월 추가 수익 (30일 기준)</span>
+                <span id="totalProfit">₩ 3,000,000</span>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">(운영비 및 식자재 원가 제외 순증액)</p>
             </div>
         </div>
     </section>
 
-    <section id="ir-strategy">
-        <h2>02. IR Strategy: 데이터 기반 수익 확신</h2>
-        <div class="strategy-box">
-            <h3 style="color:var(--gold)">Target OP: 30%</h3>
-            <p>우리는 단순히 쌀을 파는 유통사가 아니라, <b>데이터 표준을 파는 애그리테크 플랫폼</b>입니다. 진품 와사비 스마트팜의 독점적 마진과 고품질 오대쌀의 회전율이 결합하여 압도적인 ROI를 창출합니다.</p>
-        </div>
-    </section>
-
-    <section id="b2b-sales">
-        <h2>03. Sales: 미식의 삼각 편대 (Trinity)</h2>
-        <div class="dashboard-grid">
-            <div class="stat-card">
-                <h4 style="color:var(--gold)">철원 오대쌀</h4>
-                <p>수분 14.5%의 엄격한 데이터 관리로 실현하는 최상의 밥맛.</p>
-            </div>
-            <div class="stat-card">
-                <h4 style="color:var(--gold)">헤리티지 장</h4>
-                <p>화천의 세월이 빚어낸 3년 숙성의 깊은 감칠맛.</p>
-            </div>
-            <div class="stat-card">
-                <h4 style="color:var(--gold)">진품 생와사비</h4>
-                <p>셰프의 객단가를 획기적으로 높여줄 고수익 병기.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="dashboard">
-        <h2>04. Real-time Sales Dashboard</h2>
-        <div class="dashboard-grid">
-            <div class="stat-card">
-                <span class="stat-label">강남 500 클러스터 점유율</span>
-                <div class="gauge-container">
-                    <div class="gauge-bar"></div>
-                </div>
-                <span class="stat-value">15%</span>
-                <p>75 / 500 개소 거점 확보</p>
-            </div>
-
-            <div class="stat-card">
-                <span class="stat-label">셰프 월평균 추가수익</span>
-                <span class="stat-value">₩3.5M+</span>
-                <p>와사비 유료화 서비스 도입 시</p>
-            </div>
-
-            <div class="stat-card">
-                <span class="stat-label">물류 관제 상태</span>
-                <span class="stat-value" style="color: #2ecc71;">ACTIVE</span>
-                <p>화천 본부 → 강남 셰프 직송 중</p>
-            </div>
-        </div>
-        
-        <div style="text-align: center;">
-            <a href="mailto:ceo@ksmart-farm.com" class="btn">지휘관 파트너십 문의</a>
-        </div>
-    </section>
-
+    <footer>
+        <p>K-FARM GROUP | 지휘관 전용 인터랙티브 시스템</p>
+        <p>본 페이지의 모든 수치는 실시간 시뮬레이션용입니다.</p>
+    </footer>
 </div>
 
-<footer>
-    <p><b>K-FARM GROUP HEADQUARTERS</b></p>
-    <p>강원도 화천군 상서면 다목리 745 | ksmart-farm.com</p>
-</footer>
+<script>
+    // 점유율 업데이트 함수
+    let currentStores = 75;
+    function addStore() {
+        if(currentStores < 500) {
+            currentStores++;
+            const percent = (currentStores / 500 * 100).toFixed(1);
+            document.getElementById('storeCount').innerText = currentStores;
+            document.getElementById('percentText').innerText = percent + '%';
+            document.getElementById('progressBar').style.width = percent + '%';
+        }
+    }
+
+    // 수익 계산 함수
+    function calculate() {
+        const tables = document.getElementById('dailyTables').value;
+        const price = document.getElementById('wasabiPrice').value;
+        const monthly = tables * price * 30;
+        
+        document.getElementById('totalProfit').innerText = "₩ " + monthly.toLocaleString();
+    }
+
+    // 초기 실행
+    calculate();
+</script>
 
 </body>
 </html>
