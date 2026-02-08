@@ -2,21 +2,69 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>K-Farm Group 소개</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-FARM GROUP | 회사소개</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Pretendard:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        body { background: #05120b; color: #fff; font-family: sans-serif; text-align: center; padding: 50px; }
-        .content { border: 2px solid #c5a059; display: inline-block; padding: 30px; border-radius: 15px; }
-        h1 { color: #c5a059; }
-        .btn-back { display: block; margin-top: 20px; color: #aaa; text-decoration: none; }
+        :root { --gold: #D4AF37; --deep-green: #041a0f; --text-gold: #f3e5ab; }
+        body { background: #05120b; color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; }
+        
+        .top-nav { background: rgba(0,0,0,0.8); border-bottom: 2px solid var(--gold); padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Noto Serif KR', serif; color: var(--gold); font-size: 1.5rem; text-decoration: none; font-weight: 700; }
+        
+        /* 히어로 섹션 (화장의 핵심) */
+        .hero { 
+            height: 60vh; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .hero h1 { font-family: 'Noto Serif KR', serif; font-size: 3.5rem; color: var(--text-gold); margin: 0; }
+        .hero p { font-size: 1.2rem; color: var(--gold); letter-spacing: 5px; margin-top: 20px; }
+
+        .content { max-width: 900px; margin: 80px auto; padding: 0 20px; line-height: 1.8; }
+        .vision-card { background: rgba(255,255,255,0.03); border: 1px solid var(--gold); padding: 40px; border-radius: 20px; text-align: center; }
+        .vision-card h2 { color: var(--gold); font-family: 'Noto Serif KR', serif; font-size: 2rem; }
+        
+        footer { text-align: center; padding: 50px; border-top: 1px solid rgba(212,175,55,0.2); color: #888; }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>🏢 K-Farm Group</h1>
-        <p>데이터와 자연이 만나는 스마트 농업의 미래</p>
-        <p style="color: #aaa;">본사: 강원도 화천군 상서면 다목리 745</p>
-        <p>우리는 최첨단 AI 시스템을 통해 대한민국 최고의 특산물을<br>전 세계 셰프들의 식탁으로 연결합니다.</p>
-        <a href="index.html" class="btn-back">← 대시보드로 돌아가기</a>
+
+<nav class="top-nav">
+    <a href="index.html" class="logo">K-FARM GROUP</a>
+    <div class="nav-links">
+        <a href="index.html" style="color:#fff; text-decoration:none;">DASHBOARD</a>
     </div>
+</nav>
+
+<div class="hero">
+    <h1>Nature meets Technology</h1>
+    <p>대한민국 스마트 팜의 새로운 기준</p>
+</div>
+
+<div class="container content">
+    <div class="vision-card">
+        <h2>CEO MESSAGE</h2>
+        <p style="font-size: 1.2rem; font-style: italic;">
+            "75년의 관록과 4차 산업혁명의 기술이 만났습니다.<br>
+            우리는 단순히 작물을 키우는 것이 아니라,<br>
+            대한민국 식탁의 품격을 키웁니다."
+        </p>
+        <p style="color: var(--gold); font-weight: bold; margin-top: 30px;">K-Farm Group 회장</p>
+    </div>
+
+    <div style="margin-top: 100px;">
+        <h3 style="color: var(--gold); border-bottom: 1px solid var(--gold); display: inline-block;">우리의 핵심 가치</h3>
+        <p>1. <b>정밀 농업</b>: 화천의 맑은 물과 AI 기술의 결합</p>
+        <p>2. <b>직거래 혁신</b>: 생산자와 셰프를 잇는 무인 영업 시스템</p>
+        <p>3. <b>품질 제일주의</b>: 철원 오대쌀과 진품 생와사비의 명예</p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 K-FARM GROUP. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>
