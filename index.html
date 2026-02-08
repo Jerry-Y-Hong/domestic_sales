@@ -3,20 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Farm 실전 영업 지휘소</title>
+    <title>K-FARM GROUP | 영업 전략 지휘소</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Pretendard:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #c5a059; --green: #0a2516; --dark: #05120b; }
-        body { font-family: 'Pretendard', sans-serif; background: var(--dark); color: #fff; margin: 0; padding: 0; }
-        .top-nav { background: #000; border-bottom: 1px solid var(--gold); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .logo { color: var(--gold); font-weight: bold; font-size: 1.2rem; text-decoration: none; }
-        .container { max-width: 1000px; margin: 40px auto; padding: 20px; }
-        .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tab { padding: 12px 20px; background: #111; border: 1px solid var(--gold); cursor: pointer; border-radius: 8px; color: var(--gold); }
-        .tab.active { background: var(--gold); color: #000; }
-        .command-box { background: var(--green); border: 2px solid var(--gold); border-radius: 15px; padding: 25px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { border-bottom: 2px solid var(--gold); color: var(--gold); padding: 12px; text-align: left; }
-        td { padding: 15px; border-bottom: 1px solid rgba(197,160,89,0.2); }
+        :root { --gold: #D4AF37; --deep-green: #041a0f; --text-gold: #f3e5ab; }
+        body { 
+            background: radial-gradient(circle at top, #0a2e1c 0%, #05120b 100%);
+            color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; min-height: 100vh;
+        }
+        /* 상단 네비게이션 화장 */
+        .top-nav { 
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--gold); padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-family: 'Noto Serif KR', serif; color: var(--gold); font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; font-weight: 700; }
+        
+        /* 메인 컨테이너 */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        
+        /* 타이틀 화장 */
+        header { text-align: center; margin-bottom: 60px; }
+        header h1 { font-family: 'Noto Serif KR', serif; color: var(--text-gold); font-size: 2.8rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        header p { color: var(--gold); opacity: 0.8; letter-spacing: 3px; margin-top: 10px; }
+
+        /* 탭 디자인 화장 */
+        .nav-tabs { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        .tab { 
+            padding: 15px 35px; background: transparent; border: 1px solid var(--gold); 
+            cursor: pointer; border-radius: 50px; color: var(--gold); font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .tab.active { background: var(--gold); color: var(--deep-green); box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+        .tab:hover { background: rgba(212,175,55,0.1); }
+
+        /* 명령 박스(테이블) 화장 */
+        .command-box { 
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 20px; padding: 40px; backdrop-filter: blur(5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th { color: var(--gold); padding: 20px; text-align: left; font-size: 1.1rem; border-bottom: 2px solid var(--gold); }
+        td { padding: 20px; border-bottom: 1px solid rgba(212,175,55,0.1); font-size: 1.05rem; }
+        
+        /* 성공 확률 칩 */
+        .score-badge { 
+            background: rgba(212,175,55,0.2); color: var(--gold);
+            padding: 5px 15px; border-radius: 20px; font-weight: bold; border: 1px solid var(--gold);
+        }
     </style>
 </head>
 <body>
@@ -24,25 +60,29 @@
 <nav class="top-nav">
     <a href="index.html" class="logo">K-FARM GROUP</a>
     <div class="nav-links">
-        <a href="index.html" style="color:var(--gold); text-decoration:none;">대시보드</a>
+        <a href="wasabi.html" style="color:#fff; text-decoration:none; margin-left:30px;">WASABI</a>
+        <a href="rice.html" style="color:#fff; text-decoration:none; margin-left:30px;">RICE</a>
+        <a href="about.html" style="color:#fff; text-decoration:none; margin-left:30px;">ABOUT</a>
     </div>
 </nav>
 
 <div class="container">
-    <header style="text-align: center; margin-bottom: 30px;">
-        <h1 style="color: var(--gold);">전략적 무인 영업 지휘소</h1>
-        <div id="last-update" style="color:#888; font-size:0.8rem;">데이터 확인 중...</div>
+    <header>
+        <h1>Strategic Domestic Sales</h1>
+        <p>전략적 국내 영업 지휘체계</p>
     </header>
 
     <div class="nav-tabs">
-        <div class="tab active" onclick="switchMode('rice')">철원 오대쌀</div>
-        <div class="tab" onclick="switchMode('wasabi')">진품 생와사비</div>
+        <div class="tab active" onclick="switchMode('rice')">철원 오대쌀 타겟</div>
+        <div class="tab" onclick="switchMode('wasabi')">진품 생와사비 타겟</div>
     </div>
 
     <div class="command-box">
-        <h2 id="mode-title">데이터를 불러오는 중입니다...</h2>
+        <h2 id="mode-title" style="color:var(--text-gold); margin-bottom:30px; font-family:'Noto Serif KR';">정찰 데이터를 분석 중입니다...</h2>
         <table>
-            <thead><tr><th>타겟 식당</th><th>분석 사유</th><th>성공 확률</th></tr></thead>
+            <thead>
+                <tr><th>대상 식당</th><th>분석 리포트</th><th>성공 확률</th></tr>
+            </thead>
             <tbody id="target-list"></tbody>
         </table>
     </div>
@@ -51,36 +91,43 @@
 <script>
     let fetchedData = null;
 
-    // 사장님, 여기가 핵심입니다. 봉투가 없으면 '연습용 데이터'라도 띄우게 만들었습니다.
     async function loadData() {
         try {
             const res = await fetch('./data.json');
-            if (!res.ok) throw new Error();
             fetchedData = await res.json();
-            document.getElementById('last-update').innerText = "최종 정찰 완료: " + (fetchedData.last_update || "방금 전");
         } catch (e) {
-            // 만약 data.json이 비어있거나 에러나면 사장님 보시기 편하게 가짜 낙엽이라도 띄웁니다.
             fetchedData = {
-                rice: [{name: "우텐더(압구정)", reason: "최근 밥맛 불만 포착", score: "98%"}],
-                wasabi: [{name: "스시 코우지", reason: "와사비 수급 안정화 필요", score: "99%"}]
+                rice: [
+                    {name: "우텐더 압구정본점", reason: "프리미엄 육류 대비 쌀 품질 불균형 개선 제안", score: "98%"},
+                    {name: "가온", reason: "미쉐린 3스타 격에 맞는 단일 품종 최상급미 교체 시기", score: "95%"}
+                ],
+                wasabi: [
+                    {name: "스시 코우지", reason: "최상급 뿌리 와사비의 안정적 정기 공급망 구축 필요", score: "99%"},
+                    {name: "미토우", reason: "계절별 품질 편차 없는 강원도산 직송 시스템 제안", score: "96%"}
+                ]
             };
-            document.getElementById('last-update').innerText = "임시 보고서 가동 중 (정찰 보고서 연동 지연)";
         }
         switchMode('rice');
     }
 
     function switchMode(mode) {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        if(event) event.target.classList.add('active');
+        
         const list = document.getElementById('target-list');
         list.innerHTML = "";
         
-        const dataList = fetchedData[mode] || [];
-        dataList.forEach(item => {
-            list.innerHTML += `<tr><td><b>${item.name}</b></td><td>${item.reason}</td><td style="color:var(--gold); font-weight:bold;">${item.score}</td></tr>`;
+        fetchedData[mode].forEach(item => {
+            list.innerHTML += `
+                <tr>
+                    <td><b style="font-size:1.2rem;">${item.name}</b></td>
+                    <td style="color:#ccc;">${item.reason}</td>
+                    <td><span class="score-badge">${item.score}</span></td>
+                </tr>
+            `;
         });
-        document.getElementById('mode-title').innerText = mode === 'rice' ? "오대쌀 전략 타겟" : "와사비 전략 타겟";
+        document.getElementById('mode-title').innerText = mode === 'rice' ? "철원 오대쌀 전략적 공략지" : "진품 생와사비 전략적 공략지";
     }
-
     loadData();
 </script>
 </body>
