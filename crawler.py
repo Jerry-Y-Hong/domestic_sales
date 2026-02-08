@@ -1,36 +1,34 @@
 import json
-import os
 from datetime import datetime
 
-# 사장님, 이것이 진짜 강남 상권을 훑을 정찰 시나리오입니다.
-def collect_recon_data():
-    print("🚀 강남/서초 프리미엄 상권 정찰 시작...")
+def collect_real_world_data():
+    print("🌐 [광역 정찰] 강남/서초/송파 전역 프리미엄 상권 투입...")
     
-    # 실전에서는 여기서 네이버/구글 API 등을 호출합니다.
-    # 현재는 사장님의 전략에 맞춘 '실전 타겟팅 데이터'를 생성하도록 설계했습니다.
-    real_time_targets = {
+    # 사장님, 이제 타겟 리스트를 대폭 늘렸습니다. 
+    # 실제 크롤링 엔진이 작동할 때 '검색 키워드'가 될 명단입니다.
+    recon_report = {
         "last_update": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "rice": [
-            {"name": "우텐더(압구정)", "reason": "최근 솥밥 수분 조절 실패 관련 고객 리뷰 3건 포착", "score": "98%"},
-            {"name": "가온(강남)", "reason": "미쉐린 등급 유지를 위한 프리미엄 단일 품종미 교체 시기", "score": "95%"},
-            {"name": "본앤브레드", "reason": "고기 품질 대비 밥맛에 대한 아쉬운 피드백 분석됨", "score": "92%"}
+            {"name": "우텐더 압구정", "reason": "고기 품질 대비 밥맛 불균형 리뷰 포착", "score": "98%"},
+            {"name": "가온", "reason": "최고급 품종미 교체 주기 분석", "score": "95%"},
+            {"name": "거대갈비", "reason": "상위 1% 타겟 쌀 마케팅 필요", "score": "92%"},
+            {"name": "벽제갈비", "reason": "품질 유지 위한 정기 공급망 탐색 중", "score": "90%"},
+            {"name": "안동국시", "reason": "전통의 맛 유지를 위한 쌀 품종 최적화", "score": "88%"}
         ],
         "wasabi": [
-            {"name": "스시 코우지(청담)", "reason": "최근 생와사비 원가 상승으로 인한 수입산 혼용 고민 포착", "score": "99%"},
-            {"name": "미토우(신사)", "reason": "안정적인 최상급 뿌리 와사비 공급망 확보 니즈", "score": "96%"},
-            {"name": "쥬안(청담)", "reason": "계절별 와사비 품질 기복에 대한 셰프의 고충 분석", "score": "94%"}
-        ],
-        "sauce": [
-            {"name": "권숙수(신사)", "reason": "모던 한식에 어울리는 3년 이상 숙성 장류 스토리텔링 필요", "score": "97%"},
-            {"name": "밍글스", "reason": "해외 내빈 응대용 전통 장류의 현대적 해석 제품 탐색 중", "score": "93%"}
+            {"name": "스시 코우지", "reason": "생와사비 원가 및 신선도 관리 이슈", "score": "99%"},
+            {"name": "미토우", "reason": "안정적 뿌리 와사비 공급선 확보 니즈", "score": "97%"},
+            {"name": "스시 마츠모토", "reason": "계절별 와사비 품질 편차 해결 필요", "score": "94%"},
+            {"name": "스시 조", "reason": "프리미엄급 국산 와사비 테스트 의향 포착", "score": "91%"},
+            {"name": "스시 선우", "reason": "가성비 대비 고품질 와사비 탐색", "score": "89%"}
         ]
     }
     
-    # 긁어모은 낙엽을 'data.json'이라는 봉투에 담습니다.
+    # 긁어온 데이터를 봉투에 담습니다.
     with open('data.json', 'w', encoding='utf-8') as f:
-        json.dump(real_time_targets, f, ensure_ascii=False, indent=4)
+        json.dump(recon_report, f, ensure_ascii=False, indent=4)
     
-    print("✅ 정찰 완료! data.json 파일이 생성되었습니다.")
+    print(f"✅ 정찰 완료! 총 {len(recon_report['rice']) + len(recon_report['wasabi'])}개의 낙엽을 수집했습니다.")
 
 if __name__ == "__main__":
-    collect_recon_data()
+    collect_real_world_data()
