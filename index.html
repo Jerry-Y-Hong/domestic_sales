@@ -98,7 +98,9 @@
         });
     }
 
-    loadData(); // 페이지 열리자마자 데이터 호출
+    loadData(); 
+        const response = await fetch('./data.json');// 페이지 열리자마자 데이터 호출
 </script>
 </body>
 </html>
+
