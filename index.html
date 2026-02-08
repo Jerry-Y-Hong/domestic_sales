@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Farm Meta Platform</title>
+    <title>K-Farm 실전 영업 지휘소</title>
     <style>
         :root { --gold: #c5a059; --green: #0a2516; --dark: #05120b; }
         body { font-family: 'Pretendard', sans-serif; background: var(--dark); color: #fff; margin: 0; padding: 0; }
-        
-        /* 상단 네비게이션 메뉴 */
         .top-nav { background: #000; border-bottom: 1px solid var(--gold); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         .logo { color: var(--gold); font-weight: bold; font-size: 1.2rem; text-decoration: none; }
-        .nav-links a { color: #fff; text-decoration: none; margin-left: 20px; font-size: 0.9rem; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
-
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
         .container { max-width: 1000px; margin: 40px auto; padding: 20px; }
         .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; }
         .tab { padding: 12px 20px; background: #111; border: 1px solid var(--gold); cursor: pointer; border-radius: 8px; font-weight: bold; color: var(--gold); white-space: nowrap; }
         .tab.active { background: var(--gold); color: #000; }
-        
         .command-box { background: var(--green); border: 2px solid var(--gold); border-radius: 15px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th { border-bottom: 2px solid var(--gold); color: var(--gold); padding: 12px; text-align: left; }
         td { padding: 15px; border-bottom: 1px solid rgba(197,160,89,0.2); font-size: 0.95rem; }
-        .btn-send { background: #fff; color: #000; border: none; padding: 8px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .update-time { font-size: 0.8rem; color: #888; text-align: right; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -41,8 +36,10 @@
 <div class="container">
     <header style="text-align: center; margin-bottom: 30px;">
         <h1 style="color: var(--gold); font-size: 2rem; margin:0;">전략적 무인 영업 지휘소</h1>
-        <p style="color: #aaa;">AI 정찰병이 분석한 고가치 가망 고객 리포트</p>
+        <p style="color: #aaa;">실시간 낙엽 수집 데이터 기반 타겟팅</p>
     </header>
+
+    <div id="last-update" class="update-time">동기화 중...</div>
 
     <div class="nav-tabs">
         <div class="tab active" onclick="switchMode('rice')">철원 오대쌀</div>
@@ -51,59 +48,57 @@
     </div>
 
     <div class="command-box">
-        <h2 id="mode-title" style="margin-top:0;">오대쌀 전략적 타겟</h2>
+        <h2 id="mode-title" style="margin-top:0;">데이터 로딩 중...</h2>
         <table>
             <thead>
-                <tr>
-                    <th>타겟 식당</th>
-                    <th>분석 사유</th>
-                    <th>성공 확률</th>
-                    <th>액션</th>
-                </tr>
+                <tr><th>타겟 식당</th><th>분석 사유</th><th>성공 확률</th><th>액션</th></tr>
             </thead>
-            <tbody id="target-list">
-                </tbody>
+            <tbody id="target-list"></tbody>
         </table>
     </div>
 </div>
 
 <script>
-    const data = {
-        rice: [
-            { name: "우텐더(압구정)", reason: "솥밥 리뷰 불만 포착", score: "97.5%" },
-            { name: "가온(강남)", reason: "미쉐린 품질 관리 데이터 니즈", score: "91.9%" }
-        ],
-        wasabi: [
-            { name: "스시 코우지(청담)", reason: "와사비 원가/기복 리뷰", score: "99.1%" },
-            { name: "미토우(신사)", reason: "안정적 공급망 확보 절실", score: "94.8%" }
-        ],
-        sauce: [
-            { name: "권숙수(신사)", reason: "전통 장 스토리 부족", score: "93.2%" }
-        ]
-    };
+    let fetchedData = null;
+
+    // 정찰병이 긁어온 data.json 파일을 읽어오는 핵심 기능
+    async function loadData() {
+        try {
+            const response = await fetch('data.json');
+            fetchedData = await response.json();
+            document.getElementById('last-update').innerText = "최종 정찰 시간: " + fetchedData.last_update;
+            switchMode('rice'); // 초기 화면은 쌀 데이터로
+        } catch (e) {
+            console.error("데이터를 가져올 수 없습니다. 정찰병이 아직 보고서를 작성 중입니다.");
+            document.getElementById('mode-title').innerText = "정찰 보고서 대기 중...";
+        }
+    }
 
     function switchMode(mode) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        event.target.classList.add('active');
+        if(!fetchedData) return;
         
-        const title = { rice: "오대쌀 전략적 타겟", wasabi: "생와사비 전략적 타겟", sauce: "숙성 장 전략적 타겟" };
-        document.getElementById('mode-title').innerText = title[mode];
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        event?.target?.classList?.add('active');
+        
+        const titleMap = { rice: "오대쌀 전략적 타겟", wasabi: "생와사비 전략적 타겟", sauce: "숙성 장 전략적 타겟" };
+        document.getElementById('mode-title').innerText = titleMap[mode];
         
         const list = document.getElementById('target-list');
         list.innerHTML = "";
-        data[mode].forEach(item => {
+        
+        fetchedData[mode].forEach(item => {
             list.innerHTML += `
                 <tr>
                     <td><b>${item.name}</b></td>
                     <td><span style="color:#2ecc71;">●</span> ${item.reason}</td>
                     <td><b style="color:var(--gold);">${item.score}</b></td>
-                    <td><button class="btn-send" onclick="alert('맞춤형 제안서가 셰프에게 발송되었습니다.')">제안서 발송</button></td>
+                    <td><button style="padding:5px 10px; cursor:pointer;" onclick="alert('${item.name} 셰프님께 제안서가 전송되었습니다.')">발송</button></td>
                 </tr>
             `;
         });
     }
-    switchMode('rice'); // 초기 화면 설정
-</script>
 
+    loadData(); // 페이지 열리자마자 데이터 호출
+</script>
 </body>
 </html>
